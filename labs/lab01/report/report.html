@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Ниязов Санжар" />
+  <title>Отчёт по лабораторной работе №1</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Отчёт по лабораторной работе №1</h1>
+<p class="subtitle">Установка и настройка операционной системы на
+виртуальную машину</p>
+<p class="author">Ниязов Санжар</p>
+<p class="date">2 марта 2026 г.</p>
+</header>
+<h1 id="цель-работы">1.Цель работы</h1>
+<h1 id="цель-работы-1">1. Цель работы</h1>
+<p>Целью данной работы является приобретение практических навыков
+установки операционной системы на виртуальную машину, настройки
+минимально необходимых для дальнейшей работы сервисов.</p>
+<h1 id="выполнение-работы">2. Выполнение работы</h1>
+<h2 id="скачивание-virtualbox-и-образа-fedora">2.1. Скачивание
+VirtualBox и образа Fedora</h2>
+<p>Перед началом работы были скачаны необходимые файлы с официальных
+сайтов. С сайта <a href="https://www.virtualbox.org">virtualbox.org</a>
+был загружен установщик VirtualBox для Windows версии 7.2.6, а также
+Extension Pack для обеспечения дополнительной функциональности
+(поддержка USB 2.0/3.0, общий буфер обмена). С сайта <a
+href="https://fedoraproject.org/spins/sway/">fedoraproject.org</a> был
+загружен образ операционной системы Fedora Sway Live x86_64 версии
+43.</p>
+<p><img src="image/25.png" alt="Главная страница загрузки VirtualBox" />
+<em>Рисунок 1 – Страница загрузки VirtualBox с доступными
+пакетами</em></p>
+<p><img src="image/2.png" alt="Скачанные файлы установки" /> <em>Рисунок
+2 – Файлы VirtualBox, Extension Pack и образа Fedora</em></p>
+<h2 id="настройка-virtualbox">2.2. Настройка VirtualBox</h2>
+<p>После установки VirtualBox была выполнена его начальная настройка. В
+соответствии с требованиями лабораторной работы была изменена папка для
+хранения виртуальных машин по умолчанию на
+<code>D:\VirtualBox_Lab\</code>, а также настроена хост-комбинация для
+удобства работы.</p>
+<p><img src="image/3.png" alt="Настройки VirtualBox" /> <em>Рисунок 3 –
+Окно настроек VirtualBox с указанием папки для машин</em></p>
+<h2 id="создание-виртуальной-машины">2.3. Создание виртуальной
+машины</h2>
+<p>Была создана новая виртуальная машина с именем
+<code>sniyazov1</code>, соответствующем логину студента. Тип
+операционной системы указан как Linux, версия – Fedora (64-bit). На этом
+этапе образ ISO не подключался, чтобы избежать автоматической
+установки.</p>
+<p><img src="image/4.png" alt="Создание виртуальной машины" />
+<em>Рисунок 4 – Создание новой виртуальной машины с именем
+sniyazov1</em></p>
+<h2 id="настройка-параметров-виртуальной-машины">2.4. Настройка
+параметров виртуальной машины</h2>
+<p>Для корректной работы гостевой ОС были настроены следующие параметры
+оборудования: - <strong>Оперативная память:</strong> 2048 МБ
+(рекомендованный минимум для Fedora). - <strong>Процессор:</strong> 2
+ядра (для обеспечения достаточной производительности). -
+<strong>Включена поддержка EFI:</strong> в соответствии с требованиями
+лабораторной работы.</p>
+<p><img src="image/5.png" alt="Настройка оборудования ВМ" /> <em>Рисунок
+5 – Настройка оперативной памяти, процессора и включение EFI</em></p>
+<h2 id="создание-виртуального-жесткого-диска">2.5. Создание виртуального
+жесткого диска</h2>
+<p>Был создан новый виртуальный жесткий диск со следующими параметрами:
+- <strong>Тип:</strong> VDI (VirtualBox Disk Image). -
+<strong>Формат:</strong> динамический (занимает место на хосте по мере
+заполнения). - <strong>Размер:</strong> 80 ГБ (как указано в
+задании).</p>
+<p><img src="image/6.png" alt="Создание виртуального диска" />
+<em>Рисунок 6 – Создание виртуального диска размером 80 ГБ</em></p>
+<h2 id="настройка-автоматической-установки">2.6. Настройка
+автоматической установки</h2>
+<p>В мастере создания ВМ была доступна опция автоматической установки.
+На этом этапе были оставлены временные данные (<code>vboxuser</code>),
+так как имя пользователя будет задано непосредственно в установщике
+Fedora.</p>
+<p><img src="image/7.png" alt="Окно автоматической установки" />
+<em>Рисунок 7 – Окно настройки автоматической установки гостевой
+ОС</em></p>
+<h2 id="загрузка-livecd">2.7. Загрузка LiveCD</h2>
+<p>После завершения создания машины в настройках был подключен скачанный
+ISO-образ Fedora, и машина была запущена. Процесс загрузки LiveCD
+сопровождался выводом диагностических сообщений, включая предупреждения
+графического драйвера (<code>umuxfx</code>), что является известной
+особенностью работы Sway в VirtualBox.</p>
+<p><img src="image/8.png" alt="Процесс загрузки LiveCD" /> <em>Рисунок 8
+– Загрузка LiveCD с диагностическими сообщениями</em></p>
+<p>В загрузочном меню был выбран пункт
+<code>Start Fedora-Sway-Live 43</code> для запуска Live-режима.</p>
+<p><img src="image/9.png" alt="Меню загрузки Fedora" /> <em>Рисунок 9 –
+Меню выбора режима загрузки LiveCD</em></p>
+<h2 id="запуск-установщика">2.8. Запуск установщика</h2>
+<p>После загрузки графического окружения Sway была нажата комбинация
+<code>Win+D</code> для открытия меню приложений, а затем
+<code>Win+Enter</code> для запуска терминала, как указано в инструкции
+на рабочем столе. В терминале была выполнена команда
+<code>liveinst</code> для запуска графического установщика Anaconda.</p>
+<p><img src="image/10.png"
+alt="Инструкция по установке на рабочем столе" /> <em>Рисунок 10 –
+Инструкция для запуска установщика</em></p>
+<h2 id="установка-системы-через-anaconda">2.9. Установка системы через
+Anaconda</h2>
+<p>Установка Fedora была выполнена с помощью программы Anaconda.
+Ключевые этапы установки: 1. Выбор языка интерфейса (русский). 2.
+<strong>Настройка диска:</strong> выбран пункт «Использовать весь диск»,
+так как виртуальный диск чистый. 3. <strong>Настройка
+пользователя:</strong> создан пользователь <code>sniyazov01</code>,
+которому были предоставлены права администратора (группа
+<code>wheel</code>). Пароль для <code>root</code> не задавался, вход
+через <code>sudo</code>. 4. Запуск процесса установки.</p>
+<p>После завершения копирования файлов система предложила
+перезагрузиться.</p>
+<p><img src="image/12.png" alt="Настройка диска для установки" />
+<em>Рисунок 11 – Выбор диска и типа установки</em></p>
+<p><img src="image/13.png" alt="Конфигурация устройств хранения" />
+<em>Рисунок 12 – Настройка хранилища (шифрование не
+использовалось)</em></p>
+<p><img src="image/14.png" alt="Создание учетной записи пользователя" />
+<em>Рисунок 13 – Создание пользователя sniyazov01 с правами
+администратора</em></p>
+<p><img src="image/11.png" alt="Установка завершена" /> <em>Рисунок 14 –
+Сообщение об успешном завершении установки</em></p>
+<h2 id="первый-вход-и-настройка-системы">2.10. Первый вход и настройка
+системы</h2>
+<p>После перезагрузки и входа в систему под учетной записью
+<code>sniyazov01</code> была выполнена первичная настройка и установка
+необходимого программного обеспечения. Для выполнения команд с правами
+администратора использовалась утилита <code>sudo</code>.</p>
+<p>```bash [sudo] пароль для sniyazov01: root@fedora:~# После этого
+установка всех компонентов прошла успешно.</p>
+<p><img src="image/15.png"
+alt="Ошибка подключения к репозиторию Cisco OpenH264" /> <em>Рисунок 15
+– Ошибка подключения к репозиторию Cisco OpenH264</em></p>
+<p><img src="image/18.png" alt="Замена пакета openh264 на noopenh264" />
+<em>Рисунок 16 – Замена пакета openh264 на noopenh264</em></p>
+<p><img src="image/19.png"
+alt="Завершение установки группы пакетов Development Tools" />
+<em>Рисунок 17 – Завершение установки группы пакетов Development
+Tools</em></p>
+<p>Далее были выполнены команды для обновления всех пакетов системы и
+установки дополнительных полезных утилит.</p>
+<p><img src="image/20.png"
+alt="Процесс обновления пакетов (dnf update)" /> <em>Рисунок 18 –
+Процесс обновления пакетов (dnf update)</em></p>
+<p><img src="image/21.png" alt="Успешное завершение обновления" />
+<em>Рисунок 19 – Успешное завершение обновления</em></p>
+<p><img src="image/22.png" alt="Установка пакетов tmux и mc" />
+<em>Рисунок 20 – Установка пакетов tmux и mc</em></p>
+<p><img src="image/23.png"
+alt="Проверка версии установленного пакета mc" /> <em>Рисунок 21 –
+Проверка версии установленного пакета mc</em></p>
+<h1 id="домашнее-задание-анализ-dmesg">3. Домашнее задание (анализ
+dmesg)</h1>
+<p>В рамках домашнего задания был проведен анализ последовательности
+загрузки системы с помощью команды <code>dmesg</code>. Для доступа к
+полному журналу ядра команда выполнялась с правами
+суперпользователя.</p>
+<p><img src="image/24.png"
+alt="Попытка выполнения dmesg без прав root" /> <em>Рисунок 22 – Попытка
+выполнения dmesg без прав root</em></p>
+<p>После переключения на пользователя root (команда
+<code>sudo -i</code>) были получены следующие результаты. # 3.1. Версия
+ядра Linux</p>
+<p><img src="image/27.png" /> Рисунок 23 – Версия ядра Linux</p>
+<h1 id="частота-процессора">3.2. Частота процессора</h1>
+<p>С помощью команды dmesg | grep -i “detected.*mhz” была получена
+информация о тактовой частоте процессора.</p>
+<p><img src="image/27.png" /> Рисунок 24 – Частота процессора</p>
+<h1 id="модель-процессора">3.3. Модель процессора</h1>
+<p>Информация о модели процессора была получена командой dmesg | grep -i
+“cpu0”.</p>
+<p><img src="image/27.png" /> Рисунок 25 – Модель процессора</p>
+<h1 id="объём-доступной-оперативной-памяти">3.4. Объём доступной
+оперативной памяти</h1>
+<p><img src="image/29.png" /> Рисунок 27 – Обнаруженный гипервизор #
+3.6. Тип файловой системы корневого раздела</p>
+<p>Из вывода команды dmesg | grep -i “VFS” и последующих строк видно,
+что корневая файловая система — BTRFS.</p>
+<p><img src="image/30.png" /> Рисунок 28 – Определение типа файловой
+системы корня</p>
+<h1 id="последовательность-монтирования-файловых-систем">3.7.
+Последовательность монтирования файловых систем</h1>
+<p><img src="image/31.png" /> Рисунок 29 – Последовательность
+монтирования файловых систем</p>
+<ol start="4" type="1">
+<li>Ссылки 4.1. Репозиторий проекта на GitHub Все материалы по
+лабораторной работе, включая исходные файлы отчёта в формате Markdown,
+скриншоты и скомпилированные версии (PDF, DOCX), доступны в репозитории
+на GitHub:</li>
+</ol>
+<p>Репозиторий: https://github.com/Ghosts-23/study_2025-2026_os-intro [
+0.000000] Linux version 6.17.1-300.fc43.x86_64 (mockbuild@…) (gcc (GCC)
+15.2.1 2025) #1 SMP …</p>
+</body>
+</html>
