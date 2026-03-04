@@ -10,45 +10,54 @@
 <h1 id="ход-работы">Ход работы</h1>
 <p>…</p>
 <h2 id="проверка-и-настройка-git">1. Проверка и настройка Git</h2>
-<p>Были проверены и настроены основные параметры Git:</p>
-<figure>
+<p>Были проверены и настроены основные параметры Git (рис.
+\ref{fig:git-config):</p>
+<figure id="fig:git-config">
 <img src="image/1.png" alt="Настройки Git" />
 <figcaption aria-hidden="true">Настройки Git</figcaption>
 </figure>
 <h2 id="создание-pgp-ключа">2. Создание PGP-ключа</h2>
-<p>Создан PGP-ключ для подписи коммитов:</p>
-<p><img src="image/2.png" alt="Создание ключа" /> <img src="image/3.png"
-alt="Информация о ключе" /> <img src="image/4.png"
-alt="Список ключей" /></p>
+<p>Создан PGP-ключ для подписи коммитов (рис. \ref{fig:gpg-create,
+\ref{fig:gpg-info, \ref{fig:gpg-list):</p>
+<p><img src="image/2.png" id="fig:gpg-create" alt="Создание ключа" />
+<img src="image/3.png" id="fig:gpg-info" alt="Информация о ключе" />
+<img src="image/4.png" id="fig:gpg-list" alt="Список ключей" /></p>
 <h2 id="экспорт-и-добавление-ключа-на-github">3. Экспорт и добавление
 ключа на GitHub</h2>
-<p>Публичный ключ был экспортирован и добавлен в настройках GitHub:</p>
-<p><img src="image/5.png" alt="Экспорт ключа" /> <img src="image/6.png"
-alt="Ключ на GitHub" /></p>
+<p>Публичный ключ был экспортирован (рис. \ref{fig:gpg-export) и
+добавлен в настройках GitHub (рис. \ref{fig:github-gpg):</p>
+<p><img src="image/5.png" id="fig:gpg-export" alt="Экспорт ключа" />
+<img src="image/6.png" id="fig:github-gpg" alt="Ключ на GitHub" /></p>
 <h2 id="настройка-автоматической-подписи-коммитов">4. Настройка
 автоматической подписи коммитов</h2>
-<p>Настроена автоматическая подпись всех коммитов:</p>
-<figure>
+<p>Настроена автоматическая подпись всех коммитов (рис.
+\ref{fig:git-signing):</p>
+<figure id="fig:git-signing">
 <img src="image/7.png" alt="Настройка подписей" />
 <figcaption aria-hidden="true">Настройка подписей</figcaption>
 </figure>
 <h2 id="создание-подписанного-коммита">5. Создание подписанного
 коммита</h2>
-<p>Был создан тестовый файл и выполнен подписанный коммит:</p>
-<p><img src="image/8a.png" alt="Создание файла" /> <img
-src="image/8b.png" alt="Добавление в git" /> <img src="image/8c.png"
-alt="Подписанный коммит" /> <img src="image/8d.png"
-alt="Отправка на GitHub" /></p>
+<p>Был создан тестовый файл (рис. \ref{fig:file-create), добавлен в git
+(рис. \ref{fig:git-add), выполнен подписанный коммит (рис.
+\ref{fig:git-commit) и отправлен на GitHub (рис. \ref{fig:git-push):</p>
+<p><img src="image/8a.png" id="fig:file-create" alt="Создание файла" />
+<img src="image/8b.png" id="fig:git-add" alt="Добавление в git" /> <img
+src="image/8c.png" id="fig:git-commit" alt="Подписанный коммит" /> <img
+src="image/8d.png" id="fig:git-push" alt="Отправка на GitHub" /></p>
 <h2 id="проверка-подписи-на-github">6. Проверка подписи на GitHub</h2>
-<p>На GitHub коммиты отображаются с пометкой Verified:</p>
-<figure>
+<p>На GitHub коммиты отображаются с пометкой Verified (рис.
+\ref{fig:github-verified):</p>
+<figure id="fig:github-verified">
 <img src="image/9.png" alt="Verified коммиты" />
 <figcaption aria-hidden="true">Verified коммиты</figcaption>
 </figure>
 <h2 id="настройка-github-cli">7. Настройка GitHub CLI</h2>
-<p>Выполнена авторизация в GitHub CLI:</p>
-<p><img src="image/10a.png" alt="Начало авторизации" /> <img
-src="image/10d.png" alt="Успешная авторизация" /></p>
+<p>Выполнена авторизация в GitHub CLI (рис. \ref{fig:gh-start,
+\ref{fig:gh-finish):</p>
+<p><img src="image/10a.png" id="fig:gh-start"
+alt="Начало авторизации" /> <img src="image/10d.png" id="fig:gh-finish"
+alt="Успешная авторизация" /></p>
 <h1 id="вывод">Вывод</h1>
 <p>В ходе лабораторной работы были изучены средства контроля версий Git,
 создан PGP-ключ для подписи коммитов, настроена автоматическая подпись,
@@ -256,3 +265,7 @@ echo “*.log” &gt;&gt; .gitignore echo “node_modules/” &gt;&gt;
 .gitignore echo “config/local.php” &gt;&gt; .gitignore <strong>Добавить
 .gitignore в репозиторий</strong> git add .gitignore git commit -m “Add
 .gitignore”</p>
+<h1 id="список-литературы">Список литературы</h1>
+<div id="refs" role="list">
+
+</div>
