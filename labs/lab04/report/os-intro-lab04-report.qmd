@@ -1,67 +1,511 @@
 ---
-## Author
+title: "Лабораторная работа №4"
+subtitle: "Продвинутое использование git (Gitflow)"
 author:
-  name: Дмитрий Сергеевич Кулябов
-  degrees: DSc
-  orcid: 0000-0002-0877-7063
-  email: kulyabov-ds@rudn.ru
-  affiliation:
-    - name: Российский университет дружбы народов
-      country: Российская Федерация
-      postal-code: 117198
-      city: Москва
-      address: ул. Миклухо-Маклая, д. 6
-
-## Title
-title: "Шаблон отчёта по лабораторной работе"
-subtitle: "Простейший вариант"
-license: "CC BY"
+  - name: "Ниязов Санджар"
+    email: "niazovsanzar08@gmail.com"
+group: "Ghosts-23"
+date: "2026-03-06"
+lang: ru-RU
+toc: true
+toc-depth: 2
+lof: true
+lot: true
+fontsize: 12pt
+mainfont: "Liberation Serif"
+monofont: "Liberation Mono"
+geometry: "a4paper, left=20mm, right=15mm, top=20mm, bottom=20mm"
+pdf-engine: xelatex
+header-includes:
+  - \usepackage{indentfirst}
+  - \setlength{\parindent}{1.25cm}
 ---
 
 # Цель работы
 
-Здесь приводится формулировка цели лабораторной работы.
-Формулировки цели для каждой лабораторной работы приведены в методических указаниях.
-
-Цель данного шаблона --- максимально упростить подготовку отчётов по лабораторным работам.
-Модифицируя данный шаблон, студенты смогут без труда подготовить отчёт по лабораторным работам, а также познакомиться с основными возможностями разметки Markdown.
+Получение навыков правильной работы с репозиториями git, а именно: освоение модели ветвления Gitflow, семантического версионирования и стандартизации коммитов (Conventional Commits).
 
 # Задание
 
-Здесь приводится описание задания в соответствии с рекомендациями методического пособия и выданным вариантом.
+1. Установить необходимое ПО (git-flow, Node.js, pnpm).
+2. Настроить инструменты для семантического версионирования и общепринятых коммитов (commitizen, standard-changelog).
+3. Создать тестовый репозиторий `git-extended` на GitHub.
+4. Инициализировать в нем git-flow.
+5. Выполнить релиз версии 1.0.0 с созданием журнала изменений (CHANGELOG.md).
+6. Создать релиз на GitHub с помощью `gh`.
+7. Выполнить сценарий разработки новой функциональности и создать следующий релиз 1.2.3.
 
-# Теоретическое введение
+# Теоретические сведения
 
-Здесь описываются теоретические аспекты, связанные с выполнением работы.
+## Рабочий процесс Gitflow
 
-Например, в [табл. @tbl-std-dir] приведено краткое описание стандартных каталогов Unix.
+Gitflow Workflow — это строгая модель ветвления с учётом выпуска проекта. Данная модель отлично подходит для организации рабочего процесса на основе релизов.
 
-| Имя каталога | Описание каталога                                                                                                          |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|
-| `/`          | Корневая директория, содержащая всю файловую                                                                               |
-| `/bin `      | Основные системные утилиты, необходимые как в однопользовательском режиме, так и при обычной работе всем пользователям     |
-| `/etc`       | Общесистемные конфигурационные файлы и файлы конфигурации установленных программ                                           |
-| `/home`      | Содержит домашние директории пользователей, которые, в свою очередь, содержат персональные настройки и данные пользователя |
-| `/media`     | Точки монтирования для сменных носителей                                                                                   |
-| `/root`      | Домашняя директория пользователя  `root`                                                                                   |
-| `/tmp`       | Временные файлы                                                                                                            |
-| `/usr`       | Вторичная иерархия для данных пользователя                                                                                 |
+Последовательность действий при работе по модели Gitflow:
+- Из ветки `master` создаётся ветка `develop`
+- Из ветки `develop` создаются ветки `feature` для новых функций
+- Из ветки `develop` создаётся ветка `release` для подготовки релиза
+- Когда работа над веткой `feature` завершена, она сливается с веткой `develop`
+- Когда работа над веткой релиза `release` завершена, она сливается в ветки `develop` и `master`
+- Для срочных исправлений из `master` создаётся ветка `hotfix`
 
-: Описание некоторых каталогов файловой системы GNU Linux {#tbl-std-dir}
+## Семантическое версионирование
 
-Более подробно про Unix см. в [@tanenbaum_book_modern-os_ru; @robbins_book_bash_en; @zarrelli_book_mastering-bash_en; @newham_book_learning-bash_en].
+Семантическое версионирование (SemVer) описывается в манифесте семантического версионирования. Версия задаётся в виде кортежа `МАЖОРНАЯ.МИНОРНАЯ.ПАТЧ`:
+- **МАЖОРНАЯ** версия увеличивается при обратно несовместимых изменениях API
+- **МИНОРНАЯ** версия увеличивается при добавлении новой функциональности с обратной совместимостью
+- **ПАТЧ** увеличивается при обратно совместимых исправлениях ошибок
+
+## Общепринятые коммиты
+
+Спецификация Conventional Commits регламентирует структуру сообщений коммитов:
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+Основные типы коммитов:
+- `feat:` — новая функциональность (MINOR)
+- `fix:` — исправление ошибок (PATCH)
+- `chore:` — обслуживание кода
+- `docs:` — изменения в документации
+- `style:` — форматирование кода
+- `refactor:` — рефакторинг
+- `test:` — добавление тестов
 
 # Выполнение лабораторной работы
 
-Описываются проведённые действия, в качестве иллюстрации даётся ссылка на иллюстрацию ([рис. @fig-001]).
+## Установка программного обеспечения
 
-![V Сольвеевский конгресс (1927) «Электроны и фотоны»](image/solvay.jpg){#fig-001 width=70%}
+### Установка git-flow
+
+В связи с отсутствием пакета в стандартных репозиториях Fedora 43, git-flow был установлен из исходников:
+
+```bash
+# Клонирование репозитория git-flow
+cd ~/Downloads
+git clone https://github.com/nvie/gitflow.git
+cd gitflow
+
+# Инициализация подмодулей
+git submodule update --init --recursive
+
+# Установка
+sudo make install
+
+# Проверка версии
+git flow version
+```
+
+![Установка git-flow из исходников](image/4.1-git-flow-install.png){#fig:gitflow-install}
+
+### Установка Node.js и pnpm
+
+```bash
+# Установка Node.js
+sudo dnf install nodejs
+node --version
+```
+
+![Установка Node.js](image/2.png){#fig:node-install}
+
+![Завершение установки Node.js](image/3.png){#fig:node-install2}
+
+![Проверка версии Node.js](image/4.png){#fig:node-version}
+
+```bash
+# Установка pnpm
+sudo dnf install pnpm
+pnpm setup
+source ~/.bashrc
+```
+
+![Установка pnpm](image/5.png){#fig:pnpm-install}
+
+![Настройка pnpm](image/6.png){#fig:pnpm-setup}
+
+### Установка инструментов для Conventional Commits
+
+```bash
+# Установка commitizen
+pnpm add -g commitizen
+
+# Установка standard-changelog
+pnpm add -g standard-changelog
+
+# Проверка установки
+which git-cz
+which standard-changelog
+```
+
+![Установка commitizen](image/7.png){#fig:commitizen-install}
+
+![Проверка git-cz](image/8.png){#fig:gitcz-check}
+
+![Установка standard-changelog](image/9.png){#fig:stdchangelog-install}
+
+![Проверка standard-changelog](image/10.png){#fig:stdchangelog-check}
+
+## Создание и настройка тестового репозитория
+
+### Создание репозитория на GitHub
+
+На GitHub был создан публичный репозиторий `git-extended` с описанием на русском языке.
+
+![Создание репозитория на GitHub](image/4.2-github-repo-create.png){#fig:github-repo}
+
+### Инициализация локального репозитория
+
+```bash
+# Создание директории и инициализация репозитория
+mkdir -p ~/work/study/2025-2026/Операционные\ системы/git-extended
+cd ~/work/study/2025-2026/Операционные\ системы/git-extended
+git init
+git commit --allow-empty -m "first commit"
+git remote add origin git@github.com:Ghosts-23/git-extended.git
+git push -u origin master
+```
+
+### Инициализация Node.js пакета
+
+```bash
+pnpm init
+```
+
+Был создан файл `package.json` со следующими параметрами:
+- **name**: `git-extended`
+- **version**: `1.0.0`
+- **description**: `Git repo for educational purposes`
+- **author**: `Niyazov Sanzhar <niazovsanzar08@gmail.com>`
+- **license**: `CC-BY-4.0`
+- **repository**: `git@github.com:Ghosts-23/git-extended.git`
+
+### Настройка commitizen
+
+В файл `package.json` была добавлена секция `config`:
+
+```json
+{
+  "name": "git-extended",
+  "version": "1.0.0",
+  "description": "Git repo for educational purposes",
+  "main": "index.js",
+  "repository": "git@github.com:Ghosts-23/git-extended.git",
+  "author": "Niyazov Sanzhar <niazovsanzar08@gmail.com>",
+  "license": "CC-BY-4.0",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
+```
+
+![Файл package.json после настройки](image/12.png){#fig:package-json}
+
+### Первый conventional commit
+
+```bash
+git add package.json
+git cz
+```
+
+Был выбран тип коммита `chore` с описанием `add package.json with commitizen config`.
+
+![Первый conventional commit](image/13.png){#fig:first-commit}
+
+```bash
+git push --set-upstream origin master
+```
+
+![Отправка на GitHub](image/14.png){#fig:first-push}
+
+## Работа с Gitflow
+
+### Инициализация git-flow
+
+```bash
+git flow init
+```
+
+Были оставлены значения по умолчанию, кроме параметра `Version tag prefix`, который был установлен в `v`.
+
+![Инициализация git-flow](image/15.png){#fig:gitflow-init}
+
+### Отправка веток на GitHub
+
+```bash
+git push --all
+git branch --set-upstream-to=origin/develop develop
+```
+
+![Отправка всех веток](image/16.png){#fig:push-all}
+
+![Проверка веток](image/17.png){#fig:branches}
+
+## Создание первого релиза (v1.0.0)
+
+### Создание релизной ветки
+
+```bash
+git flow release start 1.0.0
+```
+
+![Создание релиза v1.0.0](image/18.png){#fig:release-start}
+
+### Генерация CHANGELOG.md
+
+```bash
+standard-changelog --first-release
+cat CHANGELOG.md
+```
+
+![Создание CHANGELOG.md](image/19.png){#fig:changelog-create}
+
+![Содержимое CHANGELOG.md](image/20.png){#fig:changelog-content}
+
+### Коммит изменений
+
+```bash
+git add CHANGELOG.md
+git cz
+```
+
+Был выбран тип коммита `chore` с описанием `add changelog for v1.0.0`.
+
+![Коммит CHANGELOG.md](image/21.png){#fig:changelog-commit}
+
+### Завершение релиза
+
+```bash
+git flow release finish 1.0.0
+```
+
+При завершении релиза было введено сообщение для тега `Release v1.0.0`.
+
+![Сообщение для тега](image/22.png){#fig:tag-message}
+
+![Процесс завершения релиза](image/23.png){#fig:release-finish}
+
+### Отправка изменений на GitHub
+
+```bash
+git push --all
+git push --tags
+```
+
+![Отправка после релиза](image/24.png){#fig:push-after-release}
+
+![Проверка тегов](image/25.png){#fig:tags-check}
+
+### Создание релиза на GitHub
+
+```bash
+gh release create v1.0.0 -F CHANGELOG.md
+gh release list
+```
+
+![Создание релиза через GitHub CLI](image/26.png){#fig:gh-release-create}
+
+![Релиз v1.0.0 на GitHub](image/4.10-github-release-v1.0.0.png){#fig:github-release}
+
+## Разработка новой функциональности
+
+### Создание feature-ветки
+
+```bash
+git flow feature start feature_branch
+```
+
+![Создание feature-ветки](image/feature-start.png){#fig:feature-start}
+
+### Добавление новой функциональности
+
+```bash
+echo "This is a new feature for version 1.2.3" > feature.txt
+git add feature.txt
+git cz
+```
+
+Был выбран тип коммита `feat` с описанием `add feature.txt for version 1.2.3`.
+
+![Коммит новой функциональности](image/27.png){#fig:feature-commit}
+
+### Завершение feature-ветки
+
+```bash
+git flow feature finish feature_branch
+```
+
+![Завершение feature-ветки](image/28.png){#fig:feature-finish}
+
+## Создание второго релиза (v1.2.3)
+
+### Создание релизной ветки
+
+```bash
+git flow release start 1.2.3
+```
+
+![Создание релиза v1.2.3](image/29.png){#fig:release-start-123}
+
+### Обновление версии в package.json
+
+В файле `package.json` версия была изменена с `1.0.0` на `1.2.3`.
+
+### Обновление CHANGELOG.md
+
+```bash
+standard-changelog
+cat CHANGELOG.md
+```
+
+![Обновление CHANGELOG.md](image/30.png){#fig:changelog-update}
+
+### Коммит изменений
+
+```bash
+git add package.json CHANGELOG.md
+git cz
+```
+
+Был выбран тип коммита `chore` с областью `release` и описанием `bump version to 1.2.3 and update changelog`.
+
+![Коммит для релиза v1.2.3](image/31.png){#fig:release-commit-123}
+
+### Завершение релиза
+
+```bash
+git flow release finish 1.2.3
+```
+
+![Завершение релиза v1.2.3](image/32.png){#fig:release-finish-123}
+
+### Отправка на GitHub и создание релиза
+
+```bash
+git push --all
+git push --tags
+gh release create v1.2.3 -F CHANGELOG.md
+```
+
+![Создание релиза v1.2.3 через GitHub CLI](image/33.png){#fig:gh-release-123}
+
+# Результаты работы
+
+## Созданные репозитории и файлы
+
+- **Тестовый репозиторий:** `git-extended` на GitHub
+- **Файлы:**
+  - `package.json` - конфигурация Node.js проекта
+  - `CHANGELOG.md` - журнал изменений для версий 1.0.0 и 1.2.3
+  - `feature.txt` - файл с новой функциональностью
+
+## Созданные релизы
+
+| Версия | Дата | Описание |
+|:-------|:-----|:---------|
+| v1.0.0 | 2026-03-06 | Начальный релиз |
+| v1.2.3 | 2026-03-06 | Релиз с новой функциональностью |
+
+## Ссылки
+
+- Тестовый репозиторий: [https://github.com/Ghosts-23/git-extended](https://github.com/Ghosts-23/git-extended)
+- Релиз v1.0.0: [https://github.com/Ghosts-23/git-extended/releases/tag/v1.0.0](https://github.com/Ghosts-23/git-extended/releases/tag/v1.0.0)
+- Релиз v1.2.3: [https://github.com/Ghosts-23/git-extended/releases/tag/v1.2.3](https://github.com/Ghosts-23/git-extended/releases/tag/v1.2.3)
+
+# Использованные инструменты
+
+| Инструмент | Назначение |
+|:-----------|:-----------|
+| **git-flow** | Расширение Git для реализации модели ветвления |
+| **Node.js/pnpm** | Среда выполнения и менеджер пакетов для утилит |
+| **commitizen** | Интерактивное создание коммитов по стандарту |
+| **standard-changelog** | Генерация CHANGELOG.md на основе истории коммитов |
+| **GitHub CLI (`gh`)** | Создание релизов прямо из терминала |
 
 # Выводы
 
-Здесь кратко описываются итоги проделанной работы.
+В ходе выполнения лабораторной работы №4 были получены практические навыки профессиональной работы с Git:
 
-# Список литературы{.unnumbered}
+1. **Освоена модель ветвления Gitflow**, позволяющая эффективно организовывать разработку, выпуск релизов и исправление ошибок. Были созданы и успешно использованы ветки `feature`, `release`, `develop` и `master`.
 
-::: {#refs}
-:::
+2. **Изучены принципы семантического версионирования (SemVer)** для присвоения осмысленных номеров версий. Версии `1.0.0` и `1.2.3` были присвоены в соответствии с этим стандартом.
+
+3. **Внедрена спецификация Conventional Commits**, которая стандартизирует историю изменений. Все коммиты создавались с помощью `git-cz` с указанием типа (`feat`, `chore`) и описания.
+
+4. **Настроен инструментарий** (`commitizen`, `standard-changelog`, `gh`), автоматизирующий рутинные операции:
+   - `commitizen` обеспечил единообразное оформление коммитов
+   - `standard-changelog` автоматически сгенерировал `CHANGELOG.md` на основе истории коммитов
+   - `gh release create` позволил создать релизы на GitHub прямо из терминала
+
+5. **Практически отработан полный цикл разработки**:
+   - Создание репозитория и настройка окружения
+   - Разработка новой функциональности в отдельной ветке
+   - Подготовка и выпуск релизов
+   - Публикация релизов на GitHub
+
+Полученные навыки и инструменты являются стандартом де-факто в современной индустрии разработки программного обеспечения и могут быть применены в дальнейших лабораторных работах и реальных проектах.
+
+# Контрольные вопросы
+
+1. **Что такое системы контроля версий (VCS) и для чего они нужны?**  
+   Системы контроля версий позволяют отслеживать изменения в файлах, работать над проектом совместно, возвращаться к предыдущим версиям и анализировать историю изменений.
+
+2. **В чём разница между централизованными и децентрализованными VCS?**  
+   В централизованных VCS (например, SVN) есть единый сервер с репозиторием. В децентрализованных (Git) каждый разработчик имеет полную копию репозитория локально.
+
+3. **Что такое Gitflow и какие ветки в нём используются?**  
+   Gitflow — это модель ветвления, использующая ветки: `master` (стабильные релизы), `develop` (разработка), `feature/*` (новые функции), `release/*` (подготовка релизов), `hotfix/*` (срочные исправления).
+
+4. **Что такое семантическое версионирование (SemVer)?**  
+   Это стандарт присвоения версий в формате `MAJOR.MINOR.PATCH`, где:
+   - MAJOR — несовместимые изменения API
+   - MINOR — новая функциональность с обратной совместимостью
+   - PATCH — исправления ошибок с обратной совместимостью
+
+5. **Какие типы коммитов существуют в спецификации Conventional Commits?**  
+   Основные типы: `feat` (новая функция), `fix` (исправление), `docs` (документация), `style` (форматирование), `refactor` (рефакторинг), `perf` (производительность), `test` (тесты), `chore` (обслуживание).
+
+6. **Для чего нужен файл CHANGELOG.md?**  
+   Для ведения журнала изменений проекта, чтобы пользователи и разработчики могли видеть, что изменилось в каждой версии.
+
+7. **Что делает команда `git flow release finish`?**  
+   Завершает работу над релизом: вливает релизную ветку в `master` и `develop`, создаёт тег с номером версии, удаляет релизную ветку.
+
+8. **Для чего используется GitHub CLI (`gh`)?**  
+   Для управления репозиториями, создания релизов, работы с pull request и другими функциями GitHub прямо из командной строки.
+
+# Список использованных источников
+
+1. Документация Git: [https://git-scm.com/doc](https://git-scm.com/doc)
+2. Документация Gitflow: [https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+3. Семантическое версионирование: [https://semver.org/](https://semver.org/)
+4. Conventional Commits: [https://www.conventionalcommits.org/](https://www.conventionalcommits.org/)
+5. Документация Quarto: [https://quarto.org/](https://quarto.org/)
+
+# Приложение: Команды для компиляции отчёта
+
+```bash
+# Переход в директорию с отчётом
+cd ~/work/study/2025-2026/Операционные\ системы/os-intro/labs/lab04/report/
+
+# Компиляция в PDF, DOCX, HTML
+quarto render os-intro-lab04-report.qmd
+
+# Создание архива для сдачи
+tar -czf lab04-report.tar.gz \
+  os-intro-lab04-report.qmd \
+  _output/os-intro-lab04-report.pdf \
+  _output/os-intro-lab04-report.docx \
+  _output/os-intro-lab04-report.html \
+  image/
+
+# Создание релиза на GitHub (основного репозитория)
+git tag -a 4.0.0 -m "Lab 4 final with PDF, DOCX, HTML and archive"
+git push origin 4.0.0
+```
